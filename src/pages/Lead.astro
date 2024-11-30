@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro'; // Import the layout for common elements like navbar and footer
+import currentUserData from '../data/currentUser.json'; // Dynamically import the current user's data from JSON
+
+// Sample leaderboard data
+let leaderboard = [
+    { name: currentUserData.name, xp: currentUserData.xp},
+    { name: 'Tammy', xp: 1500 },
+    { name: 'JayJay', xp: 1200 },
+    { name: 'pete', xp: 1000 },
+    { name: 'Beebs', xp: 800 },
+    { name: 'Gid', xp: 600 },
+];
+
+// Dynamically set the current user's info
+const currentUser = currentUserData;
+
+// Sort the leaderboard based on XP (descending order)
+leaderboard = leaderboard.sort((a, b) => b.xp - a.xp);
+
+// Assign rank based on sorted leaderboard
+leaderboard = leaderboard.map((player, index) => ({
+  ...player,
+  rank: index + 1, // Rank starts at 1
+}));
+
+// Find the current user's rank based on the sorted leaderboard
+const currentUserRank = leaderboard.find(player => player.name === currentUser.name)?.rank || 0;
+---
+
+<Layout>
+  <section class="hero text-white text-center py-12">
+    <h1 class="text-4xl font-black mb-4">Rank {currentUserRank}</h1>
+    <p class="text-xl font-semibold">XP: {currentUser.xp}</p>
+  </section>
+
+
+  
+    <!-- Leaderboard Cards -->
+    <section class="leaderboard pb-32">
+      <h1 class="text-white font-extrabold text-2xl p-6">LeaderBoard</h1>
+      <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {leaderboard.map((player) => (
+          <div 
+            key={player.rank} 
+            class={`leaderboard-card ${player.name === currentUser.name ? 'bg-lime-400 text-black' : 'bg-neutral-800/75 text-white'} p-6 shadow-lg rounded-lg `}
+          >
+            <div class="flex justify-between items-center">
+              <p class="text-xl font-bold">{player.rank}</p>
+              <p class="text-xl font-semibold">{player.name}</p>
+              <p class="text-xl font-semibold">{player.xp} XP</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  
+</Layout>

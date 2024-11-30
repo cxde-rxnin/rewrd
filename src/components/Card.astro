@@ -1,0 +1,39 @@
+---
+const user = {
+  name: "Jane Doe",
+  xp: 450, // Current XP
+  level: 3, // Current level
+  xpForNextLevel: 500, // XP needed for the next level
+};
+
+const progressPercentage = (user.xp / user.xpForNextLevel) * 100; // Calculate progress bar percentage
+---
+
+<div class="p-4 flex justify-center">
+  <!-- User XP Card -->
+  <div class="bg-lime-400 shadow-lg rounded-2xl w-screen h-40 flex flex-col justify-evenly items-center space-y-6 pb-4">
+    <div class="flex justify-between items-center h-32 w-11/12">
+        <!-- XP Details -->
+        <h1 class="text-4xl font-black text-black">
+          {user.xp} / {user.xpForNextLevel} XP
+        </h1>
+
+        <!-- Level Symbol -->
+        <div class="flex items-center justify-center w-8 h-8 bg-neutral-900 text-neutral-500/50 rounded-full text-xl font-bold -mt-16">
+            {user.level}
+        </div>
+    </div>
+    
+
+    <!-- Progress Bar -->
+    <div class="w-11/12 bg-neutral-600 rounded-full h-2">
+      <div
+        class="bg-yellow-300 h-2 rounded-full"
+        style={`width: ${progressPercentage}%`}
+      ></div>
+    </div>
+
+    
+
+  </div>
+</div>

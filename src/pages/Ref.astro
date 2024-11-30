@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout>
+  <div class="referral-screen p-6 text-white">
+    <h1 class="text-3xl font-bold mb-4">Referrals</h1>
+    <p class="text-gray-300 mb-6">Invite your friends and earn rewards!</p>
+
+    <!-- Referral Stats -->
+    <div class="referral-stats bg-neutral-800/75 p-4 rounded-md mb-6">
+      <h2 class="text-xl font-semibold mb-2">Your Stats</h2>
+      <p>Total Referrals: <span class="text-white font-bold">5</span></p>
+      <p>Total XP Earned: <span class="text-white font-bold">500 XP</span></p>
+    </div>
+
+    <!-- Referral Link -->
+    <div class="referral-link bg-neutral-800/75 p-4 rounded-md mb-6">
+      <h2 class="text-xl font-semibold mb-2">Your Referral Link</h2>
+      <div class="flex items-center justify-between">
+        <input
+          type="text"
+          readonly
+          value="https://example.com/ref/your-id"
+          class="bg-lime-400/10 text-white rounded-md px-4 py-2 w-full max-w-md"
+        />
+        <button
+          onclick="copyToClipboard()"
+          class="ml-4 bg-white text-black px-4 py-2 rounded-md"
+        >
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <!-- Referral Rewards -->
+    <div class="referral-rewards bg-neutral-800/75 p-4 rounded-md">
+      <h2 class="text-xl font-semibold mb-2">Rewards</h2>
+      <p class="text-gray-300">
+        Earn <span class="text-lime-400 font-bold">100 XP</span> for each successful referral.
+      </p>
+    </div>
+  </div>
+
+  <!-- Optional: Referral List -->
+  <!-- Uncomment if needed later -->
+<!--   
+  <div class="referral-list bg-gray-800 p-4 rounded-md mt-6">
+    <h2 class="text-xl font-semibold mb-2">Your Referrals</h2>
+    <ul class="text-gray-300">
+      <li>John Doe - <span class="text-yellow-400">100 XP</span></li>
+      <li>Jane Smith - <span class="text-yellow-400">100 XP</span></li>
+    </ul>
+  </div>
+  -->
+
+  <script>
+    function copyToClipboard() {
+      const input = document.querySelector('input[type="text"]');
+      input.select();
+      input.setSelectionRange(0, 99999); // For mobile devices
+      navigator.clipboard.writeText(input.value);
+      alert("Referral link copied!");
+    }
+  </script>
+</Layout>
